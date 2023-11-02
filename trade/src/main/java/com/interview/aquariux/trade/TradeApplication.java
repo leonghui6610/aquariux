@@ -25,6 +25,41 @@ public class TradeApplication {
 /*
 http://localhost:8080/h2-console/
 jdbc URL: jdbc:h2:file:./dataTrade
-username: interview
-password: interview
+username: dba
+password: aquariux
+
+requirements as follows:
+
+1)scheduler is at SymbolScheduler.java -  10 seconds interval scheduler to retrieve the pricing from the source
+above and store the best pricing into the database.
+
+Assumption best aggregated price is
+a) best Bid price if new bid price higher than existing bid price
+b) best Ask price if new ask price lower than existing ask price
+
+2) To use api to retrieve the latest best aggregated price.
+
+use GET:    http://localhost:8008/crypto/getPrices
+
+3) To use api which allows users to trade based on the latest best aggregated price.
+
+    use POST: http://localhost:8008/crypto/trade
+    Trader Id 1 was already created at DataInitilizer class upon server startup
+
+    POST body
+    sample 1
+        {
+            "traderId":1,"symbol":"BTCUSDT","unit":0.1,"direction":"BUY"
+        }
+        sample 2
+        {
+            "traderId":1,"symbol":"BTCUSDT","unit":0.1,"direction":"SELL"
+        }
+
+4) To use api to retrieve the user’s crypto currencies wallet balance
+   use GET:  http://localhost:8008/crypto/trade?traderId=1
+
+5) To use api to retrieve the user trading history.
+    use GET: http://localhost:8008/crypto/history?traderId=1
+
  */

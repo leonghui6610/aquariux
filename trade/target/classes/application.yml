@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:h2:file:./dataTrade
-    username: interview
-    password: interview
+    username: dba
+    password: aquariux
     driverClassName: org.h2.Driver
   jpa:
     properties:
