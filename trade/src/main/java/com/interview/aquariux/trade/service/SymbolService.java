@@ -5,6 +5,7 @@ import com.interview.aquariux.trade.entities.Symbol;
 import com.interview.aquariux.trade.entities.SymbolRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,13 +23,16 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class SymbolService extends BaseServiceSupport<Symbol, Long, SymbolRepo> {
+
+    @Value("${aggregate.url:#{null}}")
+    private String priceURL;
     public void refreshSymbols() {
         try {
             RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<SymbolDto[]> responseEntity = restTemplate.getForEntity("https://api.binance.com/api/v3/ticker/bookTicker", SymbolDto[].class);
+            ResponseEntity<SymbolDto[]> responseEntity = restTemplate.getForEntity(priceURL, SymbolDto[].class);
             if (responseEntity != null && responseEntity.getBody() != null) {
                 SymbolDto[] latestSymbolDtos = responseEntity.getBody();
-                //log.info("scheduled refresh symbol count: {}", latestSymbolDtos.length);
+                log.info("scheduled refresh symbol count: {}", latestSymbolDtos.length);
                 List<Symbol> getCurrentAll = repo.findAll();
                 List<Symbol> latestSymbols = Arrays.asList(latestSymbolDtos).stream().map(s -> {
                     Symbol e = new Symbol();
