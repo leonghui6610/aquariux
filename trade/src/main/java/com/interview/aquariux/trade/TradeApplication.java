@@ -23,7 +23,7 @@ public class TradeApplication {
 
 
 /*
-http://localhost:8080/h2-console/
+http://localhost:8008/h2-console/
 jdbc URL: jdbc:h2:file:./dataTrade
 username: dba
 password: aquariux
