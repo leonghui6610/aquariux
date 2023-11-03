@@ -35,34 +35,6 @@ public abstract class BaseServiceSupport<T extends BaseVO, ID extends Serializab
         repo.saveAll(vos);
     }
 
-    /*  @Async("delKLinePool")
-      @Override
-      public void delete(ID id, boolean hard) {
-          T t = findById(id);
-          log.info("deleting {}, hard {}", t, hard);
-          if (!hard && t instanceof AuditVO vo) {
-              vo.setDeleted(true);
-              t = repo.save(t);
-          } else {
-              try {
-                  repo.delete(t);
-              } catch (DataIntegrityViolationException e) {
-                  throw new BizException(ResponseCode.DELETE_PARENT);
-              }
-          }
-      }
-
-      // by default hard deletion
-      @Override
-      public void delete(ID id) {
-          delete(id, true);
-      }
-
-      @Override
-      public void deleteSoftly(ID id) {
-          delete(id, false);
-      }
-  */
     @Override
     @SuppressWarnings("unchecked")
     public T saveRaw(T vo) throws Exception {

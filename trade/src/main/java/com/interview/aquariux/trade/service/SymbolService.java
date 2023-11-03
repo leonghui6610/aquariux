@@ -32,7 +32,7 @@ public class SymbolService extends BaseServiceSupport<Symbol, Long, SymbolRepo> 
             ResponseEntity<SymbolDto[]> responseEntity = restTemplate.getForEntity(priceURL, SymbolDto[].class);
             if (responseEntity != null && responseEntity.getBody() != null) {
                 SymbolDto[] latestSymbolDtos = responseEntity.getBody();
-                log.info("scheduled refresh symbol count: {}", latestSymbolDtos.length);
+                //log.info("scheduled refresh symbol count: {}", latestSymbolDtos.length);
                 List<Symbol> getCurrentAll = repo.findAll();
                 List<Symbol> latestSymbols = Arrays.asList(latestSymbolDtos).stream().map(s -> {
                     Symbol e = new Symbol();

@@ -13,11 +13,4 @@ public interface BaseService<T, ID extends Serializable, R extends BaseRepo<T, I
     void save(Collection<T> vos);
 
     T saveRaw(T vo) throws Exception;
-
-/*    void delete(ID id, boolean hard);
-
-    void delete(ID id);
-
-    void deleteSoftly(ID id);
-    */
 }
